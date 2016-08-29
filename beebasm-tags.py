@@ -80,13 +80,15 @@ def macro(filename, line_number, line, statement):
     add_tag(filename, line_number, statement[1], '^' + search_escape(line) + '$')
 
 
-def add_tag(filename, line_number, tag, address):
+def add_tag(filename, line_number, tag, address, tag_field = None):
     if tag is None:
         return
     if address is None:
-        address = str(line_number) + ';"' + tag
+        address = str(line_number)
     else:
         address = '/' + address + '/'
+    if tag_field is not None:
+        address += ';"\t' + tag_field
     tags.append(tag + '\t' + filename + '\t' + address)
 
 
@@ -115,6 +117,7 @@ args = parser.parse_args()
 
 tags = []
 for input_file in args.input_files:
+    add_tag(input_file, 1, input_file, None, "F")
     process_file(input_file)
 
 if args.f == '-':
