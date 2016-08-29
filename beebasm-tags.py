@@ -97,7 +97,8 @@ def process_file(filename):
         with open(filename) as f:
             for (line_number, line) in enumerate(f):
                 line_number += 1 # switch from 0 to 1 based
-                line = line.strip()
+                if line[-1] == '\n':
+                    line = line[0:-1]
                 tokens = tokenise(line)
                 for statement in tokens:
                     if statement[0] == '.':
