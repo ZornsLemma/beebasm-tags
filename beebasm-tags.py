@@ -83,10 +83,17 @@ def macro(filename, line_number, line, statement):
 def add_tag(filename, line_number, tag, address, tag_field = None):
     if tag is None:
         return
+
     if address is None:
         address = str(line_number)
     else:
         address = '/' + address + '/'
+
+    if (tag, filename, address) in tags_generated:
+        address = str(line_number)
+    else:
+        tags_generated.add((tag, filename, address))
+
     if tag_field is not None:
         address += ';"\t' + tag_field
     tags.append(tag + '\t' + filename + '\t' + address)
@@ -117,6 +124,7 @@ parser.add_argument('input_files', metavar='source_file', nargs='+', help='BeebA
 args = parser.parse_args()
 
 tags = []
+tags_generated = set()
 for input_file in args.input_files:
     add_tag(input_file, 1, input_file, None, "F")
     process_file(input_file)
