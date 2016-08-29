@@ -108,7 +108,7 @@ def process_file(filename):
         die('Cannot open source file "' + filename + '": ' + os.strerror(e.errno))
 
 
-parser = argparse.ArgumentParser(description='Generate tags file from beebasm source files')
+parser = argparse.ArgumentParser(description='Generate tags file from BeebAsm source files')
 parser.add_argument('-f', metavar='tags_file', default='tags', help='Write tags to specified file (default "tags")')
 parser.add_argument('input_files', metavar='source_file', nargs='+', help='BeebAsm source file to scan')
 args = parser.parse_args()
