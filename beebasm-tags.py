@@ -47,11 +47,14 @@ def tokenise(line):
     return tokens
 
 
-# TODO: This is very simplistic
+# TODO: This is very simplistic.
 def search_escape(s):
+    # Note that we do *not* want to escape '.' and '*', it seems that in tags
+    # these are normal characters by default and escaping them turns them
+    # *into* regular expression characters.
     t = ''
     for c in s:
-        if c in '.*\\':
+        if c in '\\':
             t += '\\' + c
         else:
             t += c
