@@ -23,7 +23,9 @@ def tokenise(line):
             j = line.find('"', i+1)
             if j == -1:
                 j = len(line) 
-            statement.append(line[i:(j-i)+1])
+            else:
+                j += 1
+            statement.append(line[i:j])
             i = j
         else:
             special = '#:,.^*'
