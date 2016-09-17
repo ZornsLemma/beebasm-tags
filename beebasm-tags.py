@@ -56,7 +56,7 @@ def search_escape(s):
     # *into* regular expression characters.
     t = ''
     for c in s:
-        if c in '\\':
+        if c in '\\/':
             t += '\\' + c
         else:
             t += c
